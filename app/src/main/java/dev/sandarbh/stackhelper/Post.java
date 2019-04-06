@@ -2,7 +2,6 @@ package dev.sandarbh.stackhelper;
 
 import android.annotation.SuppressLint;
 import android.text.Html;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,10 +14,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+//A custom class to hold the data of the owner of the Post.
 public class Post {
 
-    public String qTitle,qBody,dateCreated;
-    public Integer answerCount,viewCount,votesCount;
+    public String qTitle,qBody,qURL;
+    public Integer answerCount,viewCount,votesCount,activity;
+    public long dateCreated;
     public User user;
     public boolean isAnswered;
     public JSONArray tags;
@@ -27,8 +28,6 @@ public class Post {
 
     public Post(JSONObject data) throws JSONException {
 
-        Log.e(TAG, "Post: Creating post");
-
         JSONObject owner = new JSONObject(data.getJSONObject("owner").toString());
         try {
             user = new User(owner);
@@ -36,20 +35,24 @@ public class Post {
             e.printStackTrace();
         }
 
+        qURL = data.getString("link");
+
+        //Unescapes the characters from HTML text
         qTitle = Html.fromHtml(data.getString("title")).toString();
         qBody = Html.fromHtml(data.getString("body_markdown")).toString();
 
         answerCount = data.getInt("answer_count");
         votesCount = data.getInt("score");
         viewCount = data.getInt("view_count");
-
-        dateCreated = getFormattedValue(data.getLong("creation_date"));
+        activity = data.getInt("last_activity_date");
+        dateCreated = data.getLong("creation_date");
 
         isAnswered =data.getBoolean("is_answered");
 
         tags = data.getJSONArray("tags");
     }
 
+    //Converts the date to human-readable and required format
     public String getFormattedValue(long value){
         Calendar cal = Calendar.getInstance();
         Date date = new Date(value*1000);
@@ -70,16 +73,17 @@ public class Post {
         return format;
     }
 
+    //To convert 1000 to 1k and 1000000 to 1M
     public String getFormattedValue(Integer originalValue){
         Double value = originalValue*1.0;
         char suffix = ' ';
         int pos;
         String format;
-        if(value>1000000) {
+        if(Math.abs(value)>1000000) {
             value /= 1000000;
             suffix = 'M';
         }
-        else if(value>1000){
+        else if(Math.abs(value)>1000){
             value/=1000;
             suffix = 'k';
         }

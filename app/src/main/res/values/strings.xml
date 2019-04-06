@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">StackHelper</string>
+    <string name="votes_demo">Votes : 2</string>
+    <string name="qTitleDemo">Get GitHub account using StackExchange API</string>
+    <string name="qBodyDemo">I am trying to use the StackExchange API to retrieve...</string>
+    <string name="usernameDemo">Username</string>
+    <string name="reputationDemo">Reputation</string>
+    <string name="viewDemo">1012 views</string>
+    <string name="creationDemo">asked Dec 4\'17</string>
+    <string name="answerDemo">Answers : 3</string>
+    <string name="tagsDemo">Tags :</string>
+    <string name="nothing_to_show">Nothing to Show.</string>
+
+    <string-array name="sortOptions">
+        <item>"relevance"</item>
+        <item>"votes"</item>
+        <item>"activity"</item>
+        <item>"creation"</item>
+
+    </string-array>
+
+    <string-array name="orderOptions">
+        <item>"desc"</item>
+        <item>"asc"</item>
+
+    </string-array>
 </resources>

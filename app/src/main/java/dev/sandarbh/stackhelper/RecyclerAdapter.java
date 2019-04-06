@@ -2,32 +2,24 @@ package dev.sandarbh.stackhelper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONException;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
-import okio.Utf8;
-
+//The RecyclerView Adapter : Does the main work
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHolder> {
 
     private Context context;
@@ -42,18 +34,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHo
     @Override
     public PostHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
+        //Inflates the "post.xml"(The Custom card view).
         LayoutInflater inflater = LayoutInflater.from(context);
         View post = inflater.inflate(R.layout.post,viewGroup,false);
 
         PostHolder newHolder = new PostHolder(post);
-        Log.e("DEBUG", "onCreateViewHolder: ");
+
         return newHolder;
     }
 
+
+    //Sets the value of every widget
     @Override
     public void onBindViewHolder(@NonNull PostHolder postHolder, int position) {
-
-        Log.e("DEBUG", "onBindViewHolder: ");
 
         Post newPost = postsList.get(position);
         String tmp;
@@ -61,6 +54,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHo
         if(newPost.isAnswered)
             postHolder.qTitle.setBackground(context.getResources().getDrawable(R.drawable.post_top_answered));
 
+        postHolder.card.setOnClickListener(v -> {
+            context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(newPost.qURL)));
+        });
         postHolder.qTitle.setText(newPost.qTitle);
         postHolder.qBody.setText(newPost.qBody);
 
@@ -70,7 +66,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHo
         tmp = "Votes : "+newPost.getFormattedValue(newPost.votesCount);
         postHolder.votesCount.setText(tmp);
 
-        //SET TAGS
+        tmp = "";
+        for(int i=0;i<newPost.tags.length();++i){
+            try {
+                tmp = tmp.concat(newPost.tags.getString(i).concat("  "));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+        postHolder.tags.setText(tmp);
 
         postHolder.username.setText(newPost.user.username);
         if(newPost.user.reputation == -1){
@@ -80,11 +85,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHo
             postHolder.reputation.setText(newPost.getFormattedValue(newPost.user.reputation));
         }
 
-        tmp = "Views : "+newPost.getFormattedValue(newPost.viewCount);
+        tmp = newPost.getFormattedValue(newPost.viewCount)+" views";
         postHolder.viewCount.setText(tmp);
 
-        postHolder.dateCreated.setText(newPost.dateCreated);
+        postHolder.dateCreated.setText(newPost.getFormattedValue(newPost.dateCreated));
 
+        //Picasso Library was used to make the image loading (for user avatars) easier.
         Picasso.get().load(newPost.user.avatarURL.toString()).
                 into(postHolder.userAvatar);
 
@@ -99,16 +105,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHo
         return postsList.size();
     }
 
+    //Initialises all the widgets of the card
     public class PostHolder extends RecyclerView.ViewHolder {
 
         private TextView qTitle,qBody,answerCount,votesCount,tags,username,reputation,viewCount,dateCreated;
         private ImageView userAvatar;
         private LinearLayout userInfo;
+        private RelativeLayout card;
 
         public PostHolder(View itemView) {
             super(itemView);
 
-            Log.e("DEBUG", "PostHolder: ");
             qTitle = itemView.findViewById(R.id.qTitle);
             qBody = itemView.findViewById(R.id.qBody);
             answerCount = itemView.findViewById(R.id.num_ans);
@@ -122,6 +129,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PostHo
             userAvatar = itemView.findViewById(R.id.avatar);
 
             userInfo = itemView.findViewById(R.id.user_info);
+
+            card = itemView.findViewById(R.id.root);
         }
     }
 
