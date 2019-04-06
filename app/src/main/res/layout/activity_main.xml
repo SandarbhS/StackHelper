@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <EditText
+            android:id="@+id/search_box"
+            style="@android:style/Widget.EditText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/actionbar"
+            android:layout_weight="10"
+            android:ellipsize="end"
+            android:hint="Search"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionbar"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:background="#007CFF"
+            android:src="@mipmap/search_button"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/results"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Nothing to Show."
+        android:textSize="40sp" />
+
+
+</RelativeLayout>

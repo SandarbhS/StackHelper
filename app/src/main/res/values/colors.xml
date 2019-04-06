@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#028090</color>
+    <color name="colorPrimaryDark">#114b5f</color>
+    <color name="colorAccent">#125166</color>
+    <color name="colorText">#54494b</color>
+    <color name="titleColor">#D9E2DB</color>
+    <color name="Background">#32292f</color>
+    <color name="Unanswered">#DDA448</color>
+    <color name="Answered">#198223</color>
+    <color name="postBG">#f2f5ea</color>
+    <color name="userBG">#AAEFDF</color>
+
+</resources>

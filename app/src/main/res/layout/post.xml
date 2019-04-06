@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/req_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/post_top_answered"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/qTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Get GitHub account using StackExchange API"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:layout_weight="2"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/titleColor"
+            android:background="@drawable/post_top_answered"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/req_header"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:background="@color/postBG">
+
+            <TextView
+                android:id="@+id/qBody"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/req_header"
+                android:gravity="start"
+                android:text="I am trying to use the **StackExchange API** to retrieve"
+                android:layout_margin="10dp"
+                android:paddingRight="40dp"
+                android:textSize="15sp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:background="@color/postBG">
+
+        <LinearLayout
+            android:id="@+id/ll2a"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@color/postBG">
+
+            <TextView
+                android:id="@+id/num_ans"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/req_header"
+                android:gravity="center"
+                android:text="Answers : 3"
+                android:layout_margin="10dp"
+                android:paddingRight="20dp"
+                android:layout_weight="1"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2b"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@color/postBG">
+
+            <TextView
+                android:id="@+id/tags"
+                android:layout_width="36dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/req_header"
+                android:gravity="center_vertical|start"
+                android:text="Tags : "
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/postBG"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/num_votes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingRight="20dp"
+                android:text="Votes : 2"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:baselineAligned="true"
+            android:background="@drawable/user_details">
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@mipmap/search_button"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="2dp"
+                    android:text="Username"
+                    android:textAlignment="textStart"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/user_reputation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reputation"
+                    android:textAlignment="textStart"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@id/ll3"
+        android:background="#77606060" />
+
+    <LinearLayout
+        android:id="@+id/ll4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal"
+        android:background="@color/postBG">
+
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/views"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHighlight="@color/colorAccent"
+                android:text="Views : 1012" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/dateCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asked Dec 4'17"
+                android:layout_gravity="end"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
+
+
+
+
